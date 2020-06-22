@@ -8,7 +8,11 @@
 
 package io.renren.common.utils;
 
+import org.apache.commons.beanutils.BeanUtils;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -23,4 +27,34 @@ public class MapUtils extends HashMap<String, Object> {
         super.put(key, value);
         return this;
     }
+
+    public Map<String, Object> queryPage(PageUtils pageUtils){
+        put(Constant.PAGE, pageUtils.getCurrPage()+"");
+        put(Constant.LIMIT, pageUtils.getPageSize()+"");
+        return this;
+    }
+
+    public Map<String, String> beanToMap(Object obj){
+        try {
+            return BeanUtils.describe(obj);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public <T> void mapToBean(T t, Map map){
+        try {
+            BeanUtils.populate(t, map);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

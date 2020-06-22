@@ -23,9 +23,9 @@ spring:
       max-request-size: 100MB
       enabled: true
   redis:
-    open: false  # 是否开启redis缓存  true开启   false关闭
+    open: true  # 是否开启redis缓存  true开启   false关闭
     database: 0
-    host: localhost
+    host: 192.168.99.100
     port: 6379
     password:    # 密码（默认为空）
     timeout: 6000ms  # 连接超时时长（毫秒）
@@ -64,9 +64,9 @@ mybatis-plus:
 
 renren:
   redis:
-    open: false
+    open: true
   shiro:
-    redis: false
+    redis: true
   # APP模块，是通过jwt认证的，如果要使用APP模块，则需要修改【加密秘钥】
   jwt:
     # 加密秘钥
@@ -74,3 +74,8 @@ renren:
     # token有效时长，7天，单位秒
     expire: 604800
     header: token
+  mail:
+    #QQ邮箱 发件箱
+    address: 471002030@qq.com
+    #授权码
+    auth: cpkutfrnyukfbgdd

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.dao.ProjectDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.app.entity.ProjectEntity" id="projectMap">
+        <result property="id" column="id"/>
+        <result property="groupId" column="group_id"/>
+        <result property="plan" column="plan"/>
+        <result property="team" column="team"/>
+        <result property="maxMember" column="max_member"/>
+        <result property="recommended" column="recommended"/>
+        <result property="backendProjectPath" column="backend_project_path"/>
+        <result property="name" column="name"/>
+        <result property="ownerId" column="owner_id"/>
+        <result property="ownerUserHome" column="owner_user_home"/>
+        <result property="ownerUserName" column="owner_user_name"/>
+        <result property="ownerUserPicture" column="owner_user_picture"/>
+        <result property="projectPath" column="project_path"/>
+        <result property="sshUrl" column="ssh_url"/>
+        <result property="currentUserRole" column="current_user_role"/>
+        <result property="currentUserRoleId" column="current_user_role_id"/>
+        <result property="depotPath" column="depot_path"/>
+        <result property="description" column="description"/>
+        <result property="gitUrl" column="git_url"/>
+        <result property="httpsUrl" column="https_url"/>
+        <result property="icon" column="icon"/>
+        <result property="forkCount" column="fork_count"/>
+        <result property="forked" column="forked"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="starCount" column="star_count"/>
+        <result property="stared" column="stared"/>
+        <result property="status" column="status"/>
+        <result property="unReadActivitiesCount" column="un_read_activities_count"/>
+        <result property="updateAt" column="update_at"/>
+        <result property="watchCount" column="watch_count"/>
+        <result property="watched" column="watched"/>
+        <result property="isPublic" column="is_public"/>
+        <result property="memberNum" column="member_num"/>
+        <result property="pin" column="pin"/>
+        <result property="type" column="type"/>
+        <result property="shared" column="shared"/>
+        <result property="forkPath" column="fork_path"/>
+    </resultMap>
+
+
+</mapper>

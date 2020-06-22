@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.renren.common.exception.RRException;
 import io.renren.common.validator.Assert;
+import io.renren.datasource.annotation.DataSource;
 import io.renren.modules.app.dao.UserDao;
 import io.renren.modules.app.entity.UserEntity;
 import io.renren.modules.app.form.LoginForm;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service("userService")
+@DataSource("slave1")
 public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements UserService {
 
 	@Override
@@ -30,15 +32,15 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
 	}
 
 	@Override
-	public long login(LoginForm form) {
+	public UserEntity login(LoginForm form) {
 		UserEntity user = queryByMobile(form.getMobile());
-		Assert.isNull(user, "手机号或密码错误");
+		Assert.isNull(user, "邮箱或密码错误");
 
 		//密码错误
 		if(!user.getPassword().equals(DigestUtils.sha256Hex(form.getPassword()))){
-			throw new RRException("手机号或密码错误");
+			throw new RRException("邮箱或密码错误");
 		}
 
-		return user.getUserId();
+		return user;
 	}
 }

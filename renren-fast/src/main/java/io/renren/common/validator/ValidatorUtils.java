@@ -13,6 +13,7 @@ import io.renren.common.exception.RRException;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -44,6 +45,20 @@ public class ValidatorUtils {
                 msg.append(constraint.getMessage()).append("<br>");
             }
             throw new RRException(msg.toString());
+        }
+    }
+
+    public static void validateMap(Map<String, Object> params, String... keys) throws RRException {
+        if (params==null || params.size()==0){
+            throw new RRException("请求参数错误");
+        }
+
+        if (keys!=null && keys.length>0){
+            for (String key:keys){
+                if (params.get(key)==null){
+                    throw new RRException(key+":参数错误");
+                }
+            }
         }
     }
 }

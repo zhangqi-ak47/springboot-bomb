@@ -21,16 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * APP测试接口
+ * APP测试接口-用户接口
  *
  * @author Mark sunlightcs@gmail.com
  */
 @RestController
-@RequestMapping("/app")
+@RequestMapping("/app/user")
 @Api("APP测试接口")
 public class AppTestController {
 
-    @Login
+    @Login//过滤是否要验证token
     @GetMapping("userInfo")
     @ApiOperation("获取用户信息")
     public R userInfo(@LoginUser UserEntity user){

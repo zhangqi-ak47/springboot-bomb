@@ -30,9 +30,12 @@ public class DynamicDataSourceTest {
     public void test(){
         Long id = 1L;
 
-        dynamicDataSourceTestService.updateUser(id);
-        dynamicDataSourceTestService.updateUserBySlave1(id);
-        dynamicDataSourceTestService.updateUserBySlave2(id);
+//        dynamicDataSourceTestService.updateUser(id);
+//        dynamicDataSourceTestService.updateUserBySlave1(id);
+//        dynamicDataSourceTestService.updateUserBySlave2(id);
+
+        dynamicDataSourceTestService.testDatabase1(id);
+        dynamicDataSourceTestService.testDatabase2(id);
     }
 
 }

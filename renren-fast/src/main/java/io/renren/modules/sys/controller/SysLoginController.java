@@ -9,8 +9,10 @@
 package io.renren.modules.sys.controller;
 
 import io.renren.common.utils.R;
+import io.renren.common.utils.RedisUtils;
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.form.SysLoginForm;
+import io.renren.modules.sys.object.SysUserObject;
 import io.renren.modules.sys.service.SysCaptchaService;
 import io.renren.modules.sys.service.SysUserService;
 import io.renren.modules.sys.service.SysUserTokenService;
@@ -42,6 +44,8 @@ public class SysLoginController extends AbstractController {
 	private SysUserTokenService sysUserTokenService;
 	@Autowired
 	private SysCaptchaService sysCaptchaService;
+	@Autowired
+	private RedisUtils redisUtils;
 
 	/**
 	 * 验证码
@@ -84,6 +88,24 @@ public class SysLoginController extends AbstractController {
 
 		//生成token，并保存到数据库
 		R r = sysUserTokenService.createToken(user.getUserId());
+
+		SysUserObject sysUserObject=new SysUserObject();
+		sysUserObject.setToken(r.get("token").toString());
+		sysUserObject.setExpire(Long.parseLong(r.get("expire").toString()));
+		sysUserObject.setUserId(user.getUserId());
+		sysUserObject.setUsername(user.getUsername());
+		sysUserObject.setPassword(user.getPassword());
+		sysUserObject.setSalt(user.getSalt());
+		sysUserObject.setEmail(user.getEmail());
+		sysUserObject.setMobile(user.getMobile());
+		sysUserObject.setStatus(user.getStatus());
+		sysUserObject.setRoleIdList(user.getRoleIdList());
+		sysUserObject.setCreateUserId(user.getCreateUserId());
+		sysUserObject.setCreateTime(user.getCreateTime());
+
+		//用userid缓存 用户信息
+		redisUtils.set(user.getUserId()+"_sys", sysUserObject);
+
 		return r;
 	}
 

@@ -23,7 +23,7 @@ public class R extends HashMap<String, Object> {
 	
 	public R() {
 		put("code", 0);
-		put("msg", "success");
+		put("msg", "成功");
 	}
 	
 	public static R error() {
@@ -52,7 +52,7 @@ public class R extends HashMap<String, Object> {
 		r.putAll(map);
 		return r;
 	}
-	
+
 	public static R ok() {
 		return new R();
 	}
